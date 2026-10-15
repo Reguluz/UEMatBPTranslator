@@ -1,0 +1,17 @@
+{
+  "name": "@ue-material-translator/cli",
+  "version": "0.1.2",
+  "description": "Translate copied UE material expressions to readable HLSL",
+  "private": true,
+  "main": "dist/index.js",
+  "bin": {
+    "ue-material": "dist/index.js"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@ue-material-translator/core": "0.1.2"
+  }
+}

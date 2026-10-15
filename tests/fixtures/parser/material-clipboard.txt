@@ -1,0 +1,38 @@
+Begin Object Class=/Script/UnrealEd.MaterialGraphNode Name="MaterialGraphNode_0" ExportPath="/Script/UnrealEd.MaterialGraphNode'/Engine/Transient.Material_0:MaterialGraph_0.MaterialGraphNode_0'"
+   Begin Object Class=/Script/Engine.MaterialExpressionTextureCoordinate Name="MaterialExpressionTextureCoordinate_0"
+   End Object
+   Begin Object Name="MaterialExpressionTextureCoordinate_0" ExportPath="/Script/Engine.MaterialExpressionTextureCoordinate'/Engine/Transient.Material_0:MaterialGraph_0.MaterialGraphNode_0.MaterialExpressionTextureCoordinate_0'"
+      CoordinateIndex=0
+      UTiling=2.000000
+      VTiling=2.000000
+      MaterialExpressionEditorX=-640
+      MaterialExpressionGuid=11111111222222223333333344444444
+      Material="/Script/Engine.Material'/Engine/Transient.Material_0'"
+   End Object
+   MaterialExpression="/Script/Engine.MaterialExpressionTextureCoordinate'MaterialExpressionTextureCoordinate_0'"
+   NodePosX=-640
+   NodeGuid=AA112233BB445566CC778899DDEEFF00
+   CustomProperties Pin (PinId=11111111222222223333333344444444,PinName="Output",Direction="EGPD_Output",PinType.PinCategory="materialinput",PinType.PinSubCategory="",PinType.PinSubCategoryObject=None,PinType.PinSubCategoryMemberReference=(),PinType.PinValueType=(),PinType.ContainerType=None,PinType.bIsReference=False,LinkedTo=(MaterialGraphNode_1 ABCDEF00112233445566778899AABBCC,),PersistentGuid=00000000000000000000000000000000,bHidden=False,bNotConnectable=False)
+End Object
+Begin Object Class=/Script/UnrealEd.MaterialGraphNode Name="MaterialGraphNode_1"
+   Begin Object Class=/Script/Engine.MaterialExpressionMultiply Name="MaterialExpressionMultiply_0"
+   End Object
+   Begin Object Name="MaterialExpressionMultiply_0"
+      A=(Expression="/Script/Engine.MaterialExpressionTextureCoordinate'MaterialGraphNode_0.MaterialExpressionTextureCoordinate_0'",OutputIndex=0,Mask=1,MaskR=1,MaskG=1,MaskB=0,MaskA=0)
+      ConstB=0.500000
+      Desc="UV scale, with \"quoted text\" and (parentheses)"
+      MaterialExpressionEditorX=-320
+   End Object
+   MaterialExpression="/Script/Engine.MaterialExpressionMultiply'MaterialExpressionMultiply_0'"
+   NodePosX=-320
+   CustomProperties Pin (PinId=ABCDEF00112233445566778899AABBCC,PinName="A",PinType.PinCategory="materialinput",LinkedTo=(MaterialGraphNode_0 11111111222222223333333344444444,),bHidden=False)
+   CustomProperties Pin (PinId=ABCDEF00112233445566778899AABBDD,PinName="B",PinType.PinCategory="materialinput",DefaultValue="0.5",bHidden=False)
+End Object
+Begin Object Class=/Script/UnrealEd.MaterialGraphNode_Comment Name="MaterialGraphNode_Comment_0"
+   NodePosX=-720
+   NodePosY=-120
+   NodeWidth=640
+   NodeHeight=240
+   NodeComment="UV preprocessing"
+   CommentColor=(R=0.120000,G=0.240000,B=0.350000,A=1.000000)
+End Object

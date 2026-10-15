@@ -1,0 +1,26 @@
+{
+  "name": "ue-material-translator-workspace",
+  "version": "0.1.2",
+  "private": true,
+  "engines": { "node": ">=22.12.0" },
+  "description": "Offline UE material clipboard to readable HLSL translator",
+  "workspaces": [
+    "packages/core",
+    "packages/cli",
+    "packages/vscode"
+  ],
+  "scripts": {
+    "build:extension": "npm run build -w @ue-material-translator/core && npm run check -w ue-material-translator && node scripts/bundle.cjs",
+    "build": "npm run build -w @ue-material-translator/core && npm run build -w @ue-material-translator/cli && npm run check -w ue-material-translator && node scripts/bundle.cjs",
+    "test": "npm run build && node --test tests/*.test.cjs",
+    "package:vscode": "npm run build && node scripts/package.cjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/vscode": "^1.96.0",
+    "@vscode/vsce": "^4.0.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.7.0"
+  },
+  "license": "UNLICENSED"
+}

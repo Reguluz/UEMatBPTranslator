@@ -1,0 +1,19 @@
+{
+  "scopeName": "source.hlsl",
+  "name": "HLSL",
+  "patterns": [
+    { "name": "comment.line.double-slash.hlsl", "begin": "//", "end": "$" },
+    { "name": "comment.block.hlsl", "begin": "/\\*", "end": "\\*/" },
+    { "name": "string.quoted.double.hlsl", "begin": "\"", "end": "\"", "patterns": [
+      { "name": "constant.character.escape.hlsl", "match": "\\\\." }
+    ] },
+    { "name": "meta.preprocessor.hlsl", "match": "^\\s*#\\s*\\w+.*$" },
+    { "name": "storage.type.hlsl", "match": "\\b(?:void|bool|int|uint|half|float|double)(?:[1-4](?:x[1-4])?)?\\b|\\b(?:Texture(?:1D|2D|3D|Cube)(?:Array)?|SamplerState|SamplerComparisonState)\\b" },
+    { "name": "keyword.control.hlsl", "match": "\\b(?:return|if|else|for|while|do|break|continue|discard|switch|case|default)\\b" },
+    { "name": "storage.modifier.hlsl", "match": "\\b(?:struct|const|static|inline|in|out|inout|uniform|row_major|column_major)\\b" },
+    { "name": "constant.language.hlsl", "match": "\\b(?:true|false)\\b" },
+    { "name": "constant.numeric.hlsl", "match": "\\b(?:0[xX][0-9a-fA-F]+|(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)(?:[eE][+-]?[0-9]+)?[fFuU]?)\\b" },
+    { "name": "support.function.hlsl", "match": "\\b(?:abs|acos|asin|atan|atan2|ceil|clamp|cos|cross|ddx|ddy|distance|dot|exp|exp2|floor|fmod|frac|length|lerp|log|log2|max|min|normalize|pow|reflect|round|rsqrt|saturate|sign|sin|smoothstep|sqrt|step|tan|trunc)\\b" },
+    { "name": "entity.name.function.hlsl", "match": "\\b[A-Za-z_][A-Za-z_0-9]*(?=\\s*\\()" }
+  ]
+}

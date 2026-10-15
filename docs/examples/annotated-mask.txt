@@ -1,0 +1,48 @@
+Begin Object Class=/Script/UnrealEd.MaterialGraphNode_Comment Name="MaterialGraphNode_Comment_0"
+   Begin Object Class=/Script/Engine.MaterialExpressionComment Name="MaterialExpressionComment_0"
+      SizeX=640
+      SizeY=320
+      Text="Mask intensity"
+      MaterialExpressionEditorX=-80
+      MaterialExpressionEditorY=-80
+   End Object
+   MaterialExpressionComment=MaterialExpressionComment'MaterialExpressionComment_0'
+   NodePosX=-80
+   NodePosY=-80
+   NodeWidth=640
+   NodeHeight=320
+   NodeComment="Mask intensity"
+End Object
+Begin Object Class=/Script/UnrealEd.MaterialGraphNode Name="MaterialGraphNode_0"
+   Begin Object Class=/Script/Engine.MaterialExpressionConstant Name="MaterialExpressionConstant_0"
+      R=0.75
+      MaterialExpressionEditorX=0
+      MaterialExpressionEditorY=0
+   End Object
+   MaterialExpression=MaterialExpressionConstant'MaterialExpressionConstant_0'
+   NodePosX=0
+   NodePosY=0
+End Object
+Begin Object Class=/Script/UnrealEd.MaterialGraphNode Name="MaterialGraphNode_1"
+   Begin Object Class=/Script/Engine.MaterialExpressionScalarParameter Name="MaterialExpressionScalarParameter_0"
+      DefaultValue=0.5
+      ParameterName="Intensity"
+      MaterialExpressionEditorX=0
+      MaterialExpressionEditorY=120
+   End Object
+   MaterialExpression=MaterialExpressionScalarParameter'MaterialExpressionScalarParameter_0'
+   NodePosX=0
+   NodePosY=120
+End Object
+Begin Object Class=/Script/UnrealEd.MaterialGraphNode Name="MaterialGraphNode_2"
+   Begin Object Class=/Script/Engine.MaterialExpressionMultiply Name="MaterialExpressionMultiply_0"
+      A=(Expression=MaterialExpressionConstant'MaterialExpressionConstant_0')
+      B=(Expression=MaterialExpressionScalarParameter'MaterialExpressionScalarParameter_0')
+      Desc="Scale mask by intensity"
+      MaterialExpressionEditorX=320
+      MaterialExpressionEditorY=0
+   End Object
+   MaterialExpression=MaterialExpressionMultiply'MaterialExpressionMultiply_0'
+   NodePosX=320
+   NodePosY=0
+End Object

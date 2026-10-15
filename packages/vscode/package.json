@@ -1,0 +1,89 @@
+{
+  "name": "ue-material-translator",
+  "displayName": "UE Material Translator",
+  "description": "将 UE 5.5 / 5.7 材质节点复制文本转换为可阅读的 HLSL 算法。",
+  "version": "0.1.2",
+  "publisher": "local-tools",
+  "license": "UNLICENSED",
+  "engines": { "vscode": "^1.96.0" },
+  "categories": ["Programming Languages", "Other"],
+  "keywords": ["unreal", "material", "blueprint", "hlsl", "shader"],
+  "main": "./dist/extension.js",
+  "activationEvents": ["onLanguage:hlsl"],
+  "contributes": {
+    "languages": [
+      { "id": "hlsl", "aliases": ["HLSL", "hlsl"], "extensions": [".hlsl", ".hlsli"] }
+    ],
+    "grammars": [
+      { "language": "hlsl", "scopeName": "source.hlsl", "path": "./syntaxes/hlsl.tmLanguage.json" }
+    ],
+    "commands": [
+      { "command": "ueMaterialTranslator.translateClipboard", "title": "UE Material: 翻译剪贴板中的材质节点" },
+      { "command": "ueMaterialTranslator.translateDocument", "title": "UE Material: 翻译当前文件" },
+      { "command": "ueMaterialTranslator.translateSelection", "title": "UE Material: 翻译当前选区" },
+      { "command": "ueMaterialTranslator.selectOutputs", "title": "UE Material: 重新选择算法输出" },
+      { "command": "ueMaterialTranslator.exportHlsl", "title": "UE Material: 保存生成的 HLSL" },
+      { "command": "ueMaterialTranslator.revealSource", "title": "UE Material: 跳转到当前算法的原始节点" }
+    ],
+    "configuration": {
+      "title": "UE Material Translator",
+      "properties": {
+        "ueMaterialTranslator.engineVersion": {
+          "type": "string", "enum": ["5.5", "5.7"], "default": "5.7",
+          "description": "输入节点文本来自的 Unreal Engine 版本。"
+        },
+        "ueMaterialTranslator.moduleStyle": {
+          "type": "string", "enum": ["auto", "scopes", "functions"], "default": "auto",
+          "description": "模块输出方式；核心会对不适合提取函数的依赖保留作用域或代码段。"
+        },
+        "ueMaterialTranslator.shadingPath": {
+          "type": "string", "enum": ["preserve", "deferred", "forward", "mobile"], "default": "preserve",
+          "enumDescriptions": [
+            "保留 ShadingPathSwitch 的全部渲染路径分支，便于阅读。",
+            "明确使用桌面延迟渲染路径。",
+            "明确使用桌面前向渲染路径。",
+            "明确使用移动渲染路径。"
+          ],
+          "description": "ShadingPathSwitch 的目标路径；默认保留分支，不自动假设桌面或移动平台。修改后重新翻译生效。"
+        },
+        "ueMaterialTranslator.externalInputTypes": {
+          "type": "object",
+          "default": {},
+          "additionalProperties": {
+            "type": "string",
+            "enum": ["float", "float2", "float3", "float4", "bool", "Texture2D", "Texture3D", "SamplerState"]
+          },
+          "description": "缺失上游节点的显式类型，以来源节点 ID 或 ID:输出端口索引为键，例如 {\"MaterialExpressionVectorParameter_0:0\":\"float4\"}。只有已知真实类型时才填写；未知类型会保留诊断。"
+        },
+        "ueMaterialTranslator.staticParameters": {
+          "type": "object",
+          "default": {},
+          "additionalProperties": { "type": "boolean" },
+          "description": "指定静态开关参数值，以真实 ParameterName 为键，例如 {\"UseDetail\":true}。true 选择 A，false 选择 B；未配置的参数保留全部静态分支。修改后重新翻译生效。"
+        },
+        "ueMaterialTranslator.moduleAssignments": {
+          "type": "object",
+          "default": {},
+          "additionalProperties": { "type": ["string", "null"] },
+          "description": "手动覆盖节点的注释框归属，以节点 ID 为键、注释框 ID 为值。null 将节点显式移出模块。用于修正重叠注释框或几何归属歧义；请使用诊断或原始文本中的真实 ID。"
+        }
+      }
+    },
+    "menus": {
+      "editor/context": [
+        { "command": "ueMaterialTranslator.translateSelection", "when": "editorHasSelection && resourceScheme != ue-material-translator", "group": "navigation@90" },
+        { "command": "ueMaterialTranslator.revealSource", "when": "resourceScheme == ue-material-translator && resourceExtname == .hlsl", "group": "navigation@90" }
+      ],
+      "editor/title": [
+        { "command": "ueMaterialTranslator.selectOutputs", "when": "resourceScheme == ue-material-translator && resourceExtname == .hlsl", "group": "navigation@90" },
+        { "command": "ueMaterialTranslator.exportHlsl", "when": "resourceScheme == ue-material-translator && resourceExtname == .hlsl", "group": "navigation@91" }
+      ]
+    }
+  },
+  "scripts": {
+    "check": "tsc -p tsconfig.json --noEmit",
+    "vscode:prepublish": "npm run build:extension --prefix ../..",
+    "package": "vsce package --no-dependencies"
+  },
+  "dependencies": { "@ue-material-translator/core": "*" }
+}
